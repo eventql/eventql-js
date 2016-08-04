@@ -2,7 +2,7 @@
   "name": "eventql-js",
   "version": "0.0.1",
   "description": "JavaScript Interface for the EventQL API",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "mocha ./test"
   },
@@ -23,10 +23,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "eventsource": "^0.2.1"
-  },
-  "standard": {
-    "parser": "babel-eslint"
+    "eventsource": "^0.2.1",
+    "http": "^3.10.5"
   },
   "devDependencies": {
     "standard": "^7.1.2"
