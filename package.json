@@ -2,7 +2,7 @@
   "name": "eventql-js",
   "version": "0.0.1",
   "description": "JavaScript Interface for the EventQL API",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "mocha ./test"
   },

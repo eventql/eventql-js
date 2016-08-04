@@ -1,7 +1,7 @@
 'use strict'
 
 var assert = require('assert');
-var Auth = require('../src/auth');
+var Auth = require('../lib/auth');
 
 describe('Auth', function() {
   describe("get", function() {

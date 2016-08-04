@@ -1,8 +1,8 @@
 'use strict'
 
 const assert = require("assert");
-const EventQL = require('../src/eventql');
-const Auth = require('../src/auth');
+const EventQL = require('../lib/eventql');
+const Auth = require('../lib/auth');
 
 const database = 'test';
 const port = 9175;
