@@ -1,6 +1,8 @@
-import { verbs, request } from './request'
+'use strict'
 
-export default class EventQL {
+const Request = require('./Request');
+
+class EventQL {
   constructor (opts) {
     if (!opts.database) {
       throw new Error('Please supply database name as `database`')
@@ -12,47 +14,59 @@ export default class EventQL {
       throw new Error('Please supply database port as `port`')
     }
 
-    this.database = opts.database
+    this.database = opts.database;
+    this.host = opts.host;
+    this.port = opts.port;
+    this.api_path = "/api/v1";
     this.uri = `http://${opts.host}:${opts.port}/api/v1`
   }
 
-  createTable = async (table, columns, type = 'timeseries') => {
+  createTable(table, columns, callback) {
     try {
       const body = Object.assign({}, {
         database: this.database,
         table_name: table,
-        table_type: type,
+        table_type: 'timeseries', //FIXME
         schema: {
           columns
         }
       })
 
-      await request(
-        `${this.uri}/tables/create_table`,
-        body,
-        verbs.post,
-        this.database
-     )
+      const req = new Request();
+      req.post(
+          this.host,
+          this.port,
+          `${this.api_path}/tables/create_table`,
+          body,
+          callback);
+    //  await request(
+    //    `${this.uri}/tables/create_table`,
+    //    body,
+    //    verbs.post,
+    //    this.database
+    // )
     } catch (err) {
       throw err
     }
   }
 
-  insert = async (table, data) => {
-    try {
-      const body = Object.assign([], [{
-        database: this.database,
-        data,
-        table
-      }])
+  insert(table, data) {
+    //try {
+    //  const body = Object.assign([], [{
+    //    database: this.database,
+    //    data,
+    //    table
+    //  }])
 
-      await request(
-        `${this.uri}/tables/insert`,
-        body,
-        verbs.post
-      )
-    } catch (err) {
-      throw err
-    }
+    //  await request(
+    //    `${this.uri}/tables/insert`,
+    //    body,
+    //    verbs.post
+    //  )
+    //} catch (err) {
+    //  throw err
+    //}
   }
 }
+
+module.exports = EventQL

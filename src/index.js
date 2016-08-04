@@ -1,1 +1,1 @@
-export { default as EventQL } from './eventql';
+exports.Client = require("./lib/client")
