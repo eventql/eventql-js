@@ -63,6 +63,20 @@ class EventQL {
       throw err
     }
   }
+
+  execute(sql_query, cb_opts) {
+    try {
+      const query_str = `format=json_sse&database=${encodeURIComponent(this.server_options.database)}&query=${encodeURIComponent(sql_query)}`
+      const req = new Request();
+      req.sse_stream(
+          this.server_options,
+          `${this.api_path}/sql?${query_str}`,
+          cb_opts);
+
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 module.exports = EventQL

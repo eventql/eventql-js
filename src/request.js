@@ -1,4 +1,7 @@
+'use strict'
+
 const http = require("http");
+const EventSource = require("eventsource");
 
 //const log = debug('eventql:api'
 
@@ -7,13 +10,9 @@ class Request {
     this.auth = auth;
   }
 
-  get() {
-
-  }
-
   post(server_options, path, body, callback) {
     const json = JSON.stringify(body);
-    const headers = Object.assign(this.__getAuthHeaders(this.auth), {
+    const headers = Object.assign(this.__getAuthHeaders(), {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'X-EventQL-Namespace': server_options.database,
@@ -52,6 +51,43 @@ class Request {
     req.end();
   }
 
+  sse_stream(server_options, path, callback_options) {
+    const url = `http://${server_options.host}:${server_options.port}${path}`;
+    let finished = false;
+    const source = new EventSource(url, { headers: this.__getAuthHeaders() });
+    source.addEventListener("progress", function(e) {
+      if (callback_options.onProgress) {
+        callback_options.onProgress(e.data);
+      }
+    });
+
+    source.addEventListener("result", function(e) {
+      if (!finished) {
+        if (callback_options.onResult) {
+          callback_options.onResult(e.data);
+        }
+        finished = true;
+      }
+    });
+
+    source.addEventListener("query_error", function(e) {
+      if (!finished) {
+        if (callback_options.onError) {
+          callback_options.onError("query_error", e.data);
+        }
+        finished = true;
+      }
+    });
+
+    source.addEventListener("error", function(e) {
+      if (!finished) {
+        if (callback_options.onError) {
+          callback_options.onError("error", e.data);
+        }
+        finished = true;
+      }
+    });
+  }
 
   /******************* private ********************/
   __getAuthHeaders() {
