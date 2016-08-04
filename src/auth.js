@@ -1,15 +1,15 @@
 'use strict'
 
 class Auth {
-  constructor() {
-    this.database = null;
+  constructor(database) {
+    if (typeof database !== 'string') {
+      throw new Error('Please provide a database name as string')
+    }
+
+    this.database = database;
     this.auth_token = null;
     this.user = null;
     this.password = null;
-  }
-
-  setDatabase(database) {
-    this.database = database;
   }
 
   setAuthToken(auth_token) {
