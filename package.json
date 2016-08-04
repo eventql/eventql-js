@@ -4,7 +4,7 @@
   "description": "JavaScript Interface for the EventQL API",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha ./test",
+    "test": "mocha ./test"
   },
   "author": "Craftship Ltd <hello@craftship.io>",
   "contributors": [
@@ -20,11 +20,10 @@
       "name": "Paul Asmuth",
       "email": "paul@asmuth.com"
     }
-
   ],
   "license": "MIT",
   "dependencies": {
-    "eventsource": "^0.2.1",
+    "eventsource": "^0.2.1"
   },
   "standard": {
     "parser": "babel-eslint"
