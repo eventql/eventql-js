@@ -20,7 +20,7 @@ describe('EventQL', function() {
 
   describe('createTable', function() {
     it("should create a new table", function(done) {
-      let eventql = new EventQL(opts);
+      const eventql = new EventQL(opts);
       eventql.createTable('sensors1', [
         {
           id: 1,
@@ -49,6 +49,36 @@ describe('EventQL', function() {
         }
         done();
       })
+    });
+  });
+
+  describe('insert', function() {
+    it("should insert a new record", function(done) {
+      const eventql = new EventQL(opts);
+      const time = new Date().toISOString()
+
+      eventql.insert('sensors', {
+        name: 'name',
+        value: 'value',
+        time: time
+      }, (error) => {
+        assert.equal(undefined, error);
+        done();
+      })
+    });
+  });
+
+  describe('execute', function() {
+    it("should execute an sql query and return the result", function(done) {
+      const eventql = new EventQL(opts);
+      eventql.execute('select 1;', {
+        onResult: function(results) {
+          assert.equal(
+              '{"results": [{"type": "table","columns": ["1"],"rows": [["1"]]}]}',
+              results);
+          done();
+        }
+      });
     });
   });
 });
