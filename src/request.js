@@ -1,6 +1,6 @@
 const http = require("http");
 
-//const log = debug('eventql:api')
+//const log = debug('eventql:api'
 
 class Request {
   constructor(auth) {
@@ -11,18 +11,18 @@ class Request {
 
   }
 
-  post(host, port, path, body, callback) {
+  post(server_options, path, body, callback) {
     const json = JSON.stringify(body);
     const headers = Object.assign(this.__getAuthHeaders(this.auth), {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'X-EventQL-Namespace': body.database,
+      'X-EventQL-Namespace': server_options.database,
       'Content-Length': Buffer.byteLength(json)
     });
 
     var req = http.request({
-      host: host,
-      port: port,
+      host: server_options.host,
+      port: server_options.port,
       path: path,
       method: "POST",
       headers: headers

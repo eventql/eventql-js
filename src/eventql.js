@@ -14,11 +14,12 @@ class EventQL {
       throw new Error('Please supply database port as `port`')
     }
 
-    this.database = opts.database;
-    this.host = opts.host;
-    this.port = opts.port;
     this.api_path = "/api/v1";
-    this.uri = `http://${opts.host}:${opts.port}/api/v1`
+    this.server_options = {
+      database: opts.database,
+      host: opts.host,
+      port: opts.port,
+    }
   }
 
   createTable(table, columns, callback) {
@@ -34,38 +35,33 @@ class EventQL {
 
       const req = new Request();
       req.post(
-          this.host,
-          this.port,
+          this.server_options,
           `${this.api_path}/tables/create_table`,
           body,
           callback);
-    //  await request(
-    //    `${this.uri}/tables/create_table`,
-    //    body,
-    //    verbs.post,
-    //    this.database
-    // )
     } catch (err) {
       throw err
     }
   }
 
-  insert(table, data) {
-    //try {
-    //  const body = Object.assign([], [{
-    //    database: this.database,
-    //    data,
-    //    table
-    //  }])
+  insert(table, data, callback) {
+    try {
+      const body = Object.assign([], [{
+        database: this.server_options.database,
+        data,
+        table
+      }]);
 
-    //  await request(
-    //    `${this.uri}/tables/insert`,
-    //    body,
-    //    verbs.post
-    //  )
-    //} catch (err) {
-    //  throw err
-    //}
+      const req = new Request();
+      req.post(
+          this.server_options,
+          `${this.api_path}/tables/insert`,
+          body,
+          callback);
+
+    } catch (err) {
+      throw err
+    }
   }
 }
 
