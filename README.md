@@ -35,7 +35,6 @@ The constructor takes as argument the name of the database you want to run the r
     getDatabase()
 
 
-<br><br>
 #EventQL
 
 ##constructor
