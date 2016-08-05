@@ -5,7 +5,7 @@ Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.
 
 It has a simple interface to create tables, insert records and run queries againt the EventQL server.
 
-
+<br>
 #Auth
 To identify your session, EventQL needs information about the current namespace.
 
@@ -30,11 +30,12 @@ The constructor takes as argument the name of the database you want to run the r
     setPassword('my_password');
     getPassword();
 
-
+<br>
 ####Database
 
     getDatabase()
 
+>
 #EventQL
 
 ##constructor
