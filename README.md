@@ -30,12 +30,12 @@ The constructor takes as argument the name of the database you want to run the r
     setPassword('my_password');
     getPassword();
 
-<br>
 ####Database
 
     getDatabase()
 
->
+
+<br><br>
 #EventQL
 
 ##constructor
