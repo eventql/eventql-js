@@ -17,14 +17,23 @@ The constructor takes as argument the name of the database you want to run the r
 
 ##Setter and getter
 
-Auth token 
-auth.setAuthToken(token) and auth.getAuthToken()
+####Auth token 
 
-User and password
-auth.setUser('my_user'), auth.setPassword('my_password') and auth.getUser and auth.getPassword
+    setAuthToken(token)
+    getAuthToken()
 
-Database
-auth.getDatabase
+####User and password
+
+    setUser('my_user')
+    getUser();
+
+    setPassword('my_password');
+    getPassword();
+
+
+####Database
+
+    getDatabase()
 
 #EventQL
 
