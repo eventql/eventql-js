@@ -96,7 +96,7 @@ The constructor takes as argument the name of the database you want to run the r
         }
       })
 
-##execute
+###execute
 
     execute(query_str, callback_options);
 
