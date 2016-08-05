@@ -9,13 +9,13 @@ It has a simple interface to create tables, insert records and run queries again
 #Auth
 To identify your session, EventQL needs information about the current namespace.
 
-##constructor
+###constructor
 
     var auth = new Auth('my_db');
 
 The constructor takes as argument the name of the database you want to run the request against.
 
-##Setter and getter
+###Setter and getter
 
 ####Auth token 
 
@@ -37,7 +37,7 @@ The constructor takes as argument the name of the database you want to run the r
 <br>
 #EventQL
 
-##constructor
+###constructor
 
 
     const auth = new Auth('my_db');
@@ -47,7 +47,7 @@ The constructor takes as argument the name of the database you want to run the r
 `auth` must be an isntance of class `Auth`.
 
 
-##createTable
+###createTable
 
     createTable(table_name, columns, error_callback);
 
@@ -81,7 +81,7 @@ The constructor takes as argument the name of the database you want to run the r
     })
 
 
-##insert
+###insert
 
     insert(table_name, record, error_callback);
 
